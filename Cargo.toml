@@ -57,13 +57,13 @@ static_cell = "2.1.1"
 #embassy-sync = { path = "../forks/embassy/embassy-sync" }
 #embassy-time = { path = "../forks/embassy/embassy-time" }
 #embassy-usb = { path = "../forks/embassy/embassy-usb" }
-embassy-embedded-hal = { git = "https://github.com/tarfu/embassy.git", branch = "n6-boot-from-external-flash" }
-embassy-executor = { git = "https://github.com/tarfu/embassy.git", branch = "n6-boot-from-external-flash" }
-embassy-futures = { git = "https://github.com/tarfu/embassy.git", branch = "n6-boot-from-external-flash" }
-embassy-stm32 = { git = "https://github.com/tarfu/embassy.git", branch = "n6-boot-from-external-flash" }
-embassy-sync = { git = "https://github.com/tarfu/embassy.git", branch = "n6-boot-from-external-flash" }
-embassy-time = { git = "https://github.com/tarfu/embassy.git", branch = "n6-boot-from-external-flash" }
-embassy-usb = { git = "https://github.com/tarfu/embassy.git", branch = "n6-boot-from-external-flash" }
+embassy-embedded-hal = { git = "https://github.com/tarfu/embassy.git", branch = "stm32-xpi-constructors" }
+embassy-executor = { git = "https://github.com/tarfu/embassy.git", branch = "stm32-xpi-constructors" }
+embassy-futures = { git = "https://github.com/tarfu/embassy.git", branch = "stm32-xpi-constructors" }
+embassy-stm32 = { git = "https://github.com/tarfu/embassy.git", branch = "stm32-xpi-constructors" }
+embassy-sync = { git = "https://github.com/tarfu/embassy.git", branch = "stm32-xpi-constructors" }
+embassy-time = { git = "https://github.com/tarfu/embassy.git", branch = "stm32-xpi-constructors" }
+embassy-usb = { git = "https://github.com/tarfu/embassy.git", branch = "stm32-xpi-constructors" }
 
 
 # cargo build/run

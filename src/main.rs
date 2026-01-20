@@ -66,7 +66,7 @@ async fn main(_spawner: Spawner) {
             prediv: PllPreDiv::DIV3, // 24 MHz / 3 = 8 MHz.
             //mul: PllMul::MUL133, // 6 MHz * 133 = 798 MHz.
             //mul: PllMul::MUL150, // 8 MHz * 150 = 1200 MHz.
-            mul: PllMul::MUL145, // 8 MHz * N / 4 / 2 (<-- XSPI div/2) -> N = XSPI bus clock in OPI mode.
+            mul: PllMul::MUL150, // 8 MHz * N / 4 / 2 (<-- XSPI div/2) -> N = XSPI bus clock in OPI mode.
             divp: Some(PllDiv::DIV1), // For debug: p,q,p,r are included in rcc Clocks log.
             divq: None,
             divr: None,
@@ -118,8 +118,8 @@ async fn main(_spawner: Spawner) {
     // Note: Enabling data cache can cause issues with DMA transfers.
     cor.SCB.enable_dcache(&mut cor.CPUID);
 
-    let xspi = embassy_stm32::xspi::Xspi::new_blocking_xspi(
-        p.XSPI2, p.PN6, p.PN2, p.PN3, p.PN4, p.PN5, p.PN8, p.PN9, p.PN10, p.PN11, p.PN1, spi_config,
+    let xspi = embassy_stm32::xspi::Xspi::new_blocking_xspi_dqs(
+        p.XSPI2, p.PN6, p.PN2, p.PN3, p.PN4, p.PN5, p.PN8, p.PN9, p.PN10, p.PN11, p.PN1, p.PN0, spi_config,
     );
 
     let mut flash = SpiFlashMemory::new(xspi);
@@ -209,7 +209,7 @@ async fn main(_spawner: Spawner) {
         "Read buffer is not all 0xFF after erase"
     );
 
-    flash.write_memory(0, &wr_buf);
+    //flash.write_memory(0, &wr_buf);
     let start = embassy_time::Instant::now();
     flash.read_memory(0, &mut rd_buf);
     let elapsed = start.elapsed();

@@ -1,0 +1,51 @@
+{
+    // Fix error: "can't find crate for `test`".
+    // See: <https://github.com/rust-lang/vscode-rust/issues/729>
+    "rust-analyzer.cargo.target": "thumbv7em-none-eabihf",
+    "rust-analyzer.check.allTargets": false,
+    // Format the code on save.    
+    "rust-analyzer.checkOnSave": true,
+    // Spellcheck words list for this workspace.
+    "cSpell.words": [
+        "adsize",
+        "adwidth",
+        "codegen",
+        "CPUID",
+        "defmt",
+        "divt",
+        "DOPI",
+        "DTCM",
+        "dwidth",
+        "eabihf",
+        "exti",
+        "Hardfault",
+        "HCLK",
+        "heapless",
+        "interruptible",
+        "ITCM",
+        "iwidth",
+        "Kbytes",
+        "Macronix",
+        "Mbit",
+        "Mbyte",
+        "MX25UW25645GXDI00",
+        "nmagic",
+        "PLLCLK",
+        "Plldivst",
+        "PLLxVCOSEL",
+        "rustc",
+        "rustflags",
+        "Rybel",
+        "SFDP",
+        "SOPI",
+        "Sysclk",
+        "Tdefmt",
+        "thumbv",
+        "Tlink",
+        "Usbphycsel",
+        "Vbat",
+        "VCOH",
+        "XSPI",
+        "Xspisel"
+    ]
+}

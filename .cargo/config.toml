@@ -1,0 +1,41 @@
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+
+runner = "probe-rs run --chip STM32H7S3L8Hx"
+
+# Use the "flip-link" linker for zero-cost stack overflow protection.
+# If the stack overflows, the program will Hardfault, as opposed to
+# run into undefined behavior.
+# See: https://github.com/knurling-rs/flip-link
+linker = "flip-link"
+
+# (Some) of these could also be set in build.rs instead. I'm keeping it here,
+# so everything to do with the compile, link, and flash process is in one place.
+rustflags = [
+    # For defmt logging, we need to add this one:
+    # <https://defmt.ferrous-systems.com/setup-app.html>
+    "-C",
+    "link-arg=-Tdefmt.x",
+
+    # Required if flash or ram addresses are not aligned to 0x10000 in memory.x
+    # <https://github.com/rust-embedded/cortex-m-quickstart/pull/95>
+    "-C",
+    "link-arg=--nmagic",
+
+    # Tell the selected linker where to find its instructions.
+    # The "link.x" file is provided by the "cortex-m-rt" crate.
+    "-C",
+    "link-arg=-Tlink.x",
+
+    # Code-size optimizations.
+    #   "trap unreachable" can save a lot of space, but requires nightly
+    #   compiler.
+    #"-Z", "trap-unreachable=no",
+    #"-C", "no-vectorize-loops",
+
+]
+
+[build]
+target = "thumbv7em-none-eabihf" # Cortex-M4F and Cortex-M7F (with FPU)
+
+[env]
+DEFMT_LOG = "trace"

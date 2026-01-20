@@ -95,7 +95,7 @@ async fn main(_spawner: Spawner) {
         free_running_clock: false,
         clock_mode: false,
         wrap_size: WrapSize::None,
-        // The initial bus clock is set at 133 MHz, as the flash will be in SPI
+        // The initial bus clock is set at 100 MHz, as the flash will be in SPI
         // mode after reset.
         // - 266 MHz clock / (1 + 1) = 133 MHz.
         // - 400 MHz clock / (3 + 1) = 100 MHz.
@@ -104,7 +104,7 @@ async fn main(_spawner: Spawner) {
         // READ instruction must be used. The nucleo board's flash can run at up to
         // 133 MHz in SPI mode and 200 MHz in OPI mode. This clock prescaler must be
         // even, otherwise the clock will not have symmetric high and low times.
-        clock_prescaler: 3, // Div/4 (Even ratio: 3+1 = 4)
+        clock_prescaler: 3, // 400 MHz / (3 + 1) = 100 MHz (Even ratio: 3+1 = 4)
         sample_shifting: false,
         chip_select_boundary: 0,
         max_transfer: 0,
@@ -133,7 +133,7 @@ async fn main(_spawner: Spawner) {
     //     read_id() with a time-out, say in 100 ms increments, until the
     //     expected result appears.
     //     See: the RESET chapter in the flash data sheet, both tables of
-    //          reset timings. Note the durations for interrupted erase
+    //          reset timings. Note the long durations for interrupted erase
     //          operations! Most operations have =< 40 us recovery time.
     Timer::after_micros(50).await;
 
@@ -190,7 +190,7 @@ async fn main(_spawner: Spawner) {
     // This will trigger the PHY auto tuning process.
     // TODO: it won't go that high! At 150MHz, the first errors appear.
     //       145 MHz is still fine.
-    flash.xspi.set_clock_prescaler(1); // DIV/2
+    flash.xspi.set_clock_prescaler(1); // 400 MHz / (1 + 1) = 200 MHz (Even ratio: 1+1 = 2)
 
     Timer::after_millis(100).await;
 
